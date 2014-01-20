@@ -1,0 +1,9 @@
+{
+  "id": "tg",
+  "user_name": "tg",
+  "uid": "2001",
+  "home": "/home/tg",
+  "shell": "/bin/bash",
+  "comment": "tg deploy user",
+  "ssh_keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAyqT9qJfwDLUtodqO7n2N55jtTw5s2pqhqyfr3kAgfKW9hF6j/GMhoQ1GUHNboPnFBSQGOH65Dgfogt//JR4udT/AFCfbjmY9WI1TWs+bp+wGgqw8bff02dqdxv8M+f6D4CcMPkx5Ws3E0oSVDoWaSleMuSxMz7G71fr1TkVl0KcAF5WRImR2h15cxjy2RBMRhgkdvRspY98LXLKJ3hWnOKwVjyCyN7mGuCo1mFFmj0b6i5Veo0e4V4qj+4l6IUFDpTK70KpGribYjuVDRg7NiqSsQ+Cf234wbLBEZwY3aZA+EcjdMzGf3EsPJxNh3At6C/CYSLoKiptmVvDdH9HRYQ== "]
+}

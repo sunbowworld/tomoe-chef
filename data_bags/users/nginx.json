@@ -1,0 +1,7 @@
+{
+  "id": "nginx",
+  "user_name": "nginx",
+  "uid": "2002",
+  "shell": "/bin/false",
+  "comment": "nginx user"
+}

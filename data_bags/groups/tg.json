@@ -1,0 +1,5 @@
+{
+  "id": "tg",
+  "group_name": "tg",
+  "memgers": ["tg", "nginx"]
+}
