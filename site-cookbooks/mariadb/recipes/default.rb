@@ -34,20 +34,32 @@ bash "set mysql root password" do
   only_if "mysqladmin -u root version"
 end
 
-# ユーザー作成
+# ユーザ作成
 node['mariadb']['users'].each do |user|
   grant    = user['grant'] || "ALL PRIVILEGES"
   database = user['database'] || "*"
   table    = user['table'] || "*"
   host     = user['host'] || "localhost"
   password = user['password'] || nil
+  
+  # ユーザ作成
   bash "create user #{user['name']}" do
-    mysql_code = "mysql -u root -p'#{node['mariadb']['root_password']}'"
-    mysql_code << " -e 'GRANT #{grant} ON #{database}.#{table}"
-    mysql_code << " TO #{user['name']}@#{host}"
-    mysql_code << " IDENTIFIED BY \\'#{password}\\'" if password
-    not_if "mysqladmin -u '#{user['name']}' -p'#{user['password']}' -e'quit'"
+    mysql_code = "/usr/bin/mysql -u root -p'#{node['mariadb']['root_password']}'"
+    mysql_code << " -e'GRANT #{grant} ON #{database}.#{table}"
+    mysql_code << %Q| TO "#{user['name']}"@"#{host}"|
+    mysql_code << %Q| IDENTIFIED BY "#{password}"| if password
+    mysql_code << "'"
+    code mysql_code
+    not_if "mysql -u '#{user['name']}' -p'#{user['password']}' -e'quit'"
   end
+  
+  # データベース作成
+  bash "create database #{user['database']}" do
+    mysql_code = "/usr/bin/mysql -u root -p'#{node['mariadb']['root_password']}'"
+    mysql_code << " -e'CREATE DATABASE #{database} CHARACTER SET utf8'"
+    code mysql_code
+    not_if "mysql -u '#{user['name']}' -p'#{user['password']}' #{database} -e'quit'"
+  end if database != "*"
 end
 
 bash "flush privileges" do
